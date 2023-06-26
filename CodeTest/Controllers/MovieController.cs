@@ -21,7 +21,11 @@ namespace CodeTest.Controllers
         {
 
             string apiKey = "9f901c25";
+
+            // Construct base URL with the API key included
             string url = $"http://www.omdbapi.com/?t={title}&apikey={apiKey}";
+
+            // Only include filters if user has provided them 
             if (!string.IsNullOrEmpty(year))
             {
                 url += $"&y={year}";
@@ -36,6 +40,7 @@ namespace CodeTest.Controllers
             {
                 HttpResponseMessage response = await client.GetAsync(url);
 
+                // Handle HTTP errors
                 if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
                     ModelState.AddModelError("", "Not Found. Please check your spelling of the movie title.");
@@ -50,13 +55,17 @@ namespace CodeTest.Controllers
                 try
                 {
                     Movie? result = await response.Content.ReadFromJsonAsync<Movie>();
+                    
+                    // OMDB does not seem to make use of HTTP 401, so the Response field must be checked
                     if(result.Response=="False") return View("NotFound");
+
+                    // Return successful result
                     return View(result);
                 }
                 catch(Exception ex)
                 {
                     MovieError? result = await response.Content.ReadFromJsonAsync<MovieError>();
-                    return View(result);
+                    return View("NotFound");
                 }
 
             }
