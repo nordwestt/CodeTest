@@ -20,10 +20,7 @@ namespace CodeTest.Controllers
         public async Task<ActionResult> Search(string title, string? year=null, string? plot=null)
         {
 
-            //string apiKey = ConfigurationManager.AppSettings["OMDbApiKey"];
             string apiKey = "9f901c25";
-
-            //string url = $"http://www.omdbapi.com/?t={title}&apikey=9f901c25";
             string url = $"http://www.omdbapi.com/?t={title}&apikey={apiKey}";
             if (!string.IsNullOrEmpty(year))
             {
@@ -50,9 +47,18 @@ namespace CodeTest.Controllers
                     return View("Index");
                 }
 
+                try
+                {
+                    Movie? result = await response.Content.ReadFromJsonAsync<Movie>();
+                    if(result.Response=="False") return View("NotFound");
+                    return View(result);
+                }
+                catch(Exception ex)
+                {
+                    MovieError? result = await response.Content.ReadFromJsonAsync<MovieError>();
+                    return View(result);
+                }
 
-                Movie? result = await response.Content.ReadFromJsonAsync<Movie>();
-                return View(result);
             }
         }
     }

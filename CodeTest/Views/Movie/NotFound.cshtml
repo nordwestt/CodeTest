@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Not found Page";
+}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">Movie Not Found</h2>
+            <p class="card-text">We're sorry, but we couldn't find the movie you were looking for.</p>
+            <p>@Html.ActionLink("Search Again", "Index", "Movie", null, new { @class = "btn btn-primary btn-lg" })</p>
+        </div>
+    </div>
+</div>

@@ -1,8 +1,8 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Search Page";
 }
 
-<h2>Search Results</h2>
+<h2>🔍 Search Results</h2>
 <div class="container mt-5">
     <div class="card">
         <div class="row">
@@ -44,5 +44,7 @@
 </div>
 
 <div class="container mt-5">
-    <p>@Html.ActionLink("Search Again", "Index", null, new { @class = "btn btn-primary" })</p>
+    <div class="d-flex justify-content-center">
+        @Html.ActionLink("Search Again", "Index", null, new { @class = "btn btn-primary btn-lg" })
+    </div>
 </div>
