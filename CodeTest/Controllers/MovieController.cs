@@ -4,6 +4,8 @@ using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Net.Http;
+using System.Configuration;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
 
 namespace CodeTest.Controllers
 {
@@ -15,9 +17,23 @@ namespace CodeTest.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Search(string title)
+        public async Task<ActionResult> Search(string title, string? year=null, string? plot=null)
         {
-            string url = $"http://www.omdbapi.com/?t={title}&apikey=9f901c25"; 
+
+            //string apiKey = ConfigurationManager.AppSettings["OMDbApiKey"];
+            string apiKey = "9f901c25";
+
+            //string url = $"http://www.omdbapi.com/?t={title}&apikey=9f901c25";
+            string url = $"http://www.omdbapi.com/?t={title}&apikey={apiKey}";
+            if (!string.IsNullOrEmpty(year))
+            {
+                url += $"&y={year}";
+            }
+            if (!string.IsNullOrEmpty(plot))
+            {
+                url += $"&plot={plot}";
+            }
+
 
             using (HttpClient client = new())
             {

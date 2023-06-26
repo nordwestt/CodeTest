@@ -7,5 +7,13 @@
 @using (Html.BeginForm("Search", "Movie", FormMethod.Post))
 {
     <p>Enter movie title: <input type="text" name="title" /></p>
+    <p>Enter year of release: <input type="text" name="year" /></p>
+    <p>Select plot length:</p>
+    <input type="radio" id="short" name="plot" value="short">
+    <label for="short">Short</label>
+    <br>
+    <input type="radio" id="full" name="plot" value="full">
+    <label for="full">Full</label>
+    <br>
     <input type="submit" value="Search" />
 }
