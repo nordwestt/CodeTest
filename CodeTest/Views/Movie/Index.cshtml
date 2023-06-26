@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Movie Search";
+}
+
+<h2>Movie Search</h2>
+
+@using (Html.BeginForm("Search", "Movie", FormMethod.Post))
+{
+    <p>Enter movie title: <input type="text" name="title" /></p>
+    <input type="submit" value="Search" />
+}

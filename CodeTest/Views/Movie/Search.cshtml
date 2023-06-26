@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Search Results</h2>
+
+<p>Title: @Model.Title</p>
+<p>Year: @Model.Year</p>
+<p>Rated: @Model.Rated</p>
+<p>Released: @Model.Released</p>
+<p>Runtime: @Model.Runtime</p>
+<p>Genre: @Model.Genre</p>
+<p>Director: @Model.Director</p>
+<p>Writer: @Model.Writer</p>
+<p>Actors: @Model.Actors</p>
+<p>Plot: @Model.Plot</p>
+<p>Language: @Model.Language</p>
+<p>Country: @Model.Country</p>
+<p>Awards: @Model.Awards</p>
+<p>Poster: <img src="@Model.Poster" alt="@Model.Title" /></p>
+<p>Ratings:</p>
+<ul>
+    @foreach (var rating in Model.Ratings)
+    {
+        <li>@rating.Source: @rating.Value</li>
+    }
+</ul>
+<p>Metascore: @Model.Metascore</p>
+<p>IMDb Rating: @Model.imdbRating</p>
+<p>IMDb Votes: @Model.imdbVotes</p>
+<p>IMDb ID: @Model.imdbID</p>
+<p>Type: @Model.Type</p>
+<p>DVD: @Model.DVD</p>
+<p>Box Office: @Model.BoxOffice</p>
+<p>Production: @Model.Production</p>
+<p>Website: @Model.Website</p>
+<p>Response: @Model.Response</p>
+
+<p>@Html.ActionLink("Search Again", "Index")</p>
